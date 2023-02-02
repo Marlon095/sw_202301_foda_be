@@ -6,7 +6,7 @@ import { Empresas, IEmpresa } from '@libs/Empresas/Empresas';
 const empresasModel = new Empresas();
 
 empresasModel.add({
-  codigo: '',
+  código: '',
   nombre: 'Mi Empresa',
   status: 'Activo'
 });
@@ -28,8 +28,8 @@ router.get('/all', (_req, res) => {
 });
 
 router.get('/byid/:id', (req, res)=>{
-  const {id: codigo} = req.params;
-  const empresa = empresasModel.getById(codigo);
+  const {id: código} = req.params;
+  const empresa = empresasModel.getById(código);
   if(empresa){
     return res.status(200).json(empresa);
   }
@@ -44,7 +44,7 @@ router.post('/new', (req, res) => {
   } = req.body;
   //TODO: Validar Entrada de datos
   const newEmpresa: IEmpresa = {
-    codigo : "",
+    código : "",
     nombre,
     status
   };
@@ -65,7 +65,7 @@ router.put('/upd/:id', (req, res) => {
   } = req.body;
 
   const UpdateEmpresa : IEmpresa = {
-    codigo: id,
+    código: id,
     nombre,
     status,
     observacion
@@ -86,8 +86,8 @@ router.put('/upd/:id', (req, res) => {
 });
 
 router.delete('/del/:id', (req, res)=>{
-  const {id : codigo} = req.params;
-  if(empresasModel.delete(codigo)){
+  const {id : código} = req.params;
+  if(empresasModel.delete(código)){
     return res.status(200).json({"deleted": true});
   }
   return res.status(404).json({"error":"No se pudo eliminar Empresa"});
