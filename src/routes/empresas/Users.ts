@@ -1,35 +1,35 @@
 import express from 'express';
 const router = express.Router();
 
-import { Empresas, IEmpresa } from '@libs/Empresas/Empresas';
+import { usuarios, user } from '@libs/Empresas/Users';
 
-const empresasModel = new Empresas();
+const usuariosModel = new usuarios();
 
-empresasModel.add({
+usuariosModel.add({
   código: '',
   nombre: 'Mi Empresa',
   status: 'Activo'
 });
 //registrar los endpoint en router
-//http://localhost:3001/empresas
+//http://localhost:3001/usuarios
 router.get('/', (_req, res)=>{
   const jsonUrls = {
-    "getAll": {"method":"get", "url": "empresas/all"},
-    "getById": {"method":"get", "url": "empresas/byid/:id"},
-    "new": {"method":"post", "url": "empresas/new"},
-    "update": {"method":"put", "url": "empresas/upd/:id"},
-    "delete": {"method":"delete", "url": "empresas/del/:id"},
+    "getAll": {"method":"get", "url": "usuarios/all"},
+    "getById": {"method":"get", "url": "usuarios/byid/:id"},
+    "new": {"method":"post", "url": "usuarios/new"},
+    "update": {"method":"put", "url": "usuarios/upd/:id"},
+    "delete": {"method":"delete", "url": "usuarios/del/:id"},
   };
   res.status(200).json(jsonUrls);
 });
 
 router.get('/all', (_req, res) => {
-  res.status(200).json(empresasModel.getAll());
+  res.status(200).json(usuariosModel.getAll());
 });
 
 router.get('/byid/:id', (req, res)=>{
   const {id: código} = req.params;
-  const empresa = empresasModel.getById(código);
+  const empresa = usuariosModel.getById(código);
   if(empresa){
     return res.status(200).json(empresa);
   }
@@ -37,18 +37,18 @@ router.get('/byid/:id', (req, res)=>{
 });
 
 router.post('/new', (req, res) => {
-  console.log("Empresas /new request body:", req.body);
+  console.log("usuarios /new request body:", req.body);
   const {
     nombre ="John Doe Corp",
     status = "Activo"
   } = req.body;
   //TODO: Validar Entrada de datos
-  const newEmpresa: IEmpresa = {
+  const newEmpresa: user = {
     código : "",
     nombre,
     status
   };
-  if (empresasModel.add(newEmpresa)) {
+  if (usuariosModel.add(newEmpresa)) {
     return res.status(200).json({"created": true});
   }
   return res.status(404).json(
@@ -64,14 +64,14 @@ router.put('/upd/:id', (req, res) => {
     observacion = ""
   } = req.body;
 
-  const UpdateEmpresa : IEmpresa = {
+  const UpdateEmpresa : user = {
     código: id,
     nombre,
     status,
     observacion
   };
 
-  if (empresasModel.update(UpdateEmpresa)) {
+  if (usuariosModel.update(UpdateEmpresa)) {
     return res
       .status(200)
       .json({"updated": true});
@@ -87,15 +87,10 @@ router.put('/upd/:id', (req, res) => {
 
 router.delete('/del/:id', (req, res)=>{
   const {id : código} = req.params;
-  if(empresasModel.delete(código)){
+  if(usuariosModel.delete(código)){
     return res.status(200).json({"deleted": true});
   }
   return res.status(404).json({"error":"No se pudo eliminar Empresa"});
 });
-/*
-router.get('/', function(_req, res){
-  
-});
- */
 
 export default router;
