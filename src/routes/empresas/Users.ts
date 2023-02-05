@@ -8,7 +8,7 @@ const usuariosnew = new usuarios();
 usuariosnew.add({
   código: '',
   nombre: 'Marlito',
-  password: '',
+  password: '123456',
   correo: '',
   status: 'Activo'
 });
