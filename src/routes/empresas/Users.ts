@@ -40,9 +40,9 @@ router.get('/byid/:id', (req, res)=>{
 router.post('/new', (req, res) => {
   console.log("usuarios /new request body:", req.body);
   const {
-    nombre ="Marlon Vallecillo",
-    correo= " hola@gmail.com",
-    password= "123456",
+    nombre ="",
+    correo = "",
+    password= "",
     status = "Activo"
   } = req.body;
   
