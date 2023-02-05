@@ -1,10 +1,13 @@
 export interface user {
     código: string;
+    correo: string;
     nombre: string;
+    password: string;
+    roles: string;
     status: string;
     created?: Date;
     updated?: Date;
-    observacion?: string;
+    ultimoAcceso?: string;
   }
   
   
