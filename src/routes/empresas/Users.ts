@@ -9,7 +9,7 @@ usuariosnew.add({
   código: '',
   nombre: 'Marlito',
   password: '123456',
-  correo: '',
+  correo: 'hola@gmail.com',
   status: 'Activo'
 });
 //http://localhost:3001/usuarios
