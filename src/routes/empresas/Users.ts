@@ -40,13 +40,13 @@ router.get('/byid/:id', (req, res)=>{
 router.post('/new', (req, res) => {
   console.log("usuarios /new request body:", req.body);
   const {
-    nombre ="John Doe Corp",
+    nombre ="Marlon Vallecillo",
     status = "Activo"
   } = req.body;
-  //TODO: Validar Entrada de datos
+  
   const newusuario: user = {
     código : "",
-    nombre,
+    nombre:"",
     correo: "",
     password:"",
     status
