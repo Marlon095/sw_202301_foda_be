@@ -7,9 +7,9 @@ const usuariosnew = new usuarios();
 
 usuariosnew.add({
   código: '',
-  nombre: 'Marlito',
+  nombre: 'Marie Bella ',
+  correo: 'bella@gmail.com',
   password: '123456',
-  correo: 'hola@gmail.com',
   status: 'Activo'
 });
 //http://localhost:3001/usuarios
@@ -41,14 +41,16 @@ router.post('/new', (req, res) => {
   console.log("usuarios /new request body:", req.body);
   const {
     nombre ="Marlon Vallecillo",
+    correo= " hola@gmail.com",
+    password= "123456",
     status = "Activo"
   } = req.body;
   
   const newusuario: user = {
     código : "",
-    nombre:"",
-    correo: "",
-    password:"",
+    nombre,
+    correo,
+    password,
     status
   };
   if (usuariosnew.add(newusuario)) {
@@ -62,7 +64,7 @@ router.post('/new', (req, res) => {
 router.put('/upd/:id', (req, res) => {
   const { id } = req.params;
   const {
-    nombre="Marlito vallecillo",
+    nombre="",
     status="Activo",
   } = req.body;
 
