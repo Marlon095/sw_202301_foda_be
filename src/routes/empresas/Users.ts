@@ -3,14 +3,15 @@ const router = express.Router();
 
 import { usuarios, user } from '@libs/Empresas/Users';
 
-const usuariosModel = new usuarios();
+const usuariosnew = new usuarios();
 
-usuariosModel.add({
+usuariosnew.add({
   código: '',
-  nombre: 'Mi Empresa',
+  nombre: 'Marlito',
+  password: '',
+  correo: '',
   status: 'Activo'
 });
-//registrar los endpoint en router
 //http://localhost:3001/usuarios
 router.get('/', (_req, res)=>{
   const jsonUrls = {
@@ -24,16 +25,16 @@ router.get('/', (_req, res)=>{
 });
 
 router.get('/all', (_req, res) => {
-  res.status(200).json(usuariosModel.getAll());
+  res.status(200).json(usuariosnew.getAll());
 });
 
 router.get('/byid/:id', (req, res)=>{
   const {id: código} = req.params;
-  const empresa = usuariosModel.getById(código);
-  if(empresa){
-    return res.status(200).json(empresa);
+  const usuario = usuariosnew.getById(código);
+  if(usuario){
+    return res.status(200).json(usuario);
   }
-  return res.status(404).json({"error":"No se encontró Empresa"});
+  return res.status(404).json({"error":"No se encontró El usuario"});
 });
 
 router.post('/new', (req, res) => {
@@ -43,35 +44,37 @@ router.post('/new', (req, res) => {
     status = "Activo"
   } = req.body;
   //TODO: Validar Entrada de datos
-  const newEmpresa: user = {
+  const newusuario: user = {
     código : "",
     nombre,
+    correo: "",
+    password:"",
     status
   };
-  if (usuariosModel.add(newEmpresa)) {
+  if (usuariosnew.add(newusuario)) {
     return res.status(200).json({"created": true});
   }
   return res.status(404).json(
-    {"error": "Error al agregar una nueva Empresa"}
+    {"error": "Error al agregar un nuevo usuario"}
   );
 });
 
 router.put('/upd/:id', (req, res) => {
   const { id } = req.params;
   const {
-    nombre="John Doe Corp",
+    nombre="Marlito vallecillo",
     status="Activo",
-    observacion = ""
   } = req.body;
 
-  const UpdateEmpresa : user = {
+  const Updateusuario : user = {
     código: id,
     nombre,
+    correo:"",
+    password:"",
     status,
-    observacion
   };
 
-  if (usuariosModel.update(UpdateEmpresa)) {
+  if (usuariosnew.update(Updateusuario)) {
     return res
       .status(200)
       .json({"updated": true});
@@ -80,17 +83,17 @@ router.put('/upd/:id', (req, res) => {
     .status(404)
     .json(
       {
-        "error": "Error al actualizar Empresa"
+        "error": "Error al actualizar usuario"
       }
     );
 });
 
 router.delete('/del/:id', (req, res)=>{
   const {id : código} = req.params;
-  if(usuariosModel.delete(código)){
+  if(usuariosnew.delete(código)){
     return res.status(200).json({"deleted": true});
   }
-  return res.status(404).json({"error":"No se pudo eliminar Empresa"});
+  return res.status(404).json({"error":"No se pudo eliminar usuario"});
 });
 
 export default router;

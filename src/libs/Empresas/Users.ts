@@ -3,7 +3,7 @@ export interface user {
     correo: string;
     nombre: string;
     password: string;
-    roles: string;
+    roles?: string;
     status: string;
     created?: Date;
     updated?: Date;
@@ -21,40 +21,40 @@ export interface user {
       return this.usuarios;
     }
     getById(código: string){
-      const usuarioToReturn = this.usuarios.find((emp)=>{
-        return emp.código === código;
+      const usuarioToReturn = this.usuarios.find((us)=>{
+        return us.código === código;
       });
       return usuarioToReturn;
     }
-    add(nuevausuario : user) {
+    add(nuevousuario : user) {
       const date = new Date();
-      const nueva: user = {
-        ...nuevausuario,
+      const nuevo: user = {
+        ...nuevousuario,
         código: (Math.random()* 1000).toString()+new Date().getTime().toString(),
         created: date,
         updated: date
       }
-      this.usuarios.push(nueva);
+      this.usuarios.push(nuevo);
       return true;
     }
   
     update(updateusuario: user){
-      const newusuarios: user[] = this.usuarios.map((emp)=>{
-        if ( emp.código === updateusuario.código ) {
-          return {...emp, ...updateusuario, updated: new Date()};
+      const newusuarios: user[] = this.usuarios.map((us)=>{
+        if ( us.código === updateusuario.código ) {
+          return {...us, ...updateusuario, updated: new Date()};
         }
-        return emp;
+        return us;
       });
       this.usuarios = newusuarios;
       return true;
     }
     delete(código: string){
-      const usuarioToDelete = this.usuarios.find((emp)=>{
-        return emp.código === código;
+      const usuarioToDelete = this.usuarios.find((us)=>{
+        return us.código === código;
       });
       if(usuarioToDelete){
-        const newusuarios: user[] = this.usuarios.filter((emp)=>{
-          return emp.código !== código;
+        const newusuarios: user[] = this.usuarios.filter((us)=>{
+          return us.código !== código;
         });
         this.usuarios = newusuarios;
         return true;
