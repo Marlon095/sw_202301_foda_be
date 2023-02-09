@@ -1,12 +1,12 @@
 import express from 'express';
 const router = express.Router();
 
-import { Empresas, IEmpresa } from '@libs/Empresas/Empresas';
+import { Empresas, IEmpresa } from '@libs/Empresas/Empresas';
 
 const empresasModel = new Empresas();
 
 empresasModel.add({
-  código: '',
+  codigo: '',
   nombre: 'Mi Empresa',
   status: 'Activo'
 });
@@ -28,8 +28,8 @@ router.get('/all', (_req, res) => {
 });
 
 router.get('/byid/:id', (req, res)=>{
-  const {id: código} = req.params;
-  const empresa = empresasModel.getById(código);
+  const {id: codigo} = req.params;
+  const empresa = empresasModel.getById(codigo);
   if(empresa){
     return res.status(200).json(empresa);
   }
@@ -44,7 +44,7 @@ router.post('/new', (req, res) => {
   } = req.body;
   //TODO: Validar Entrada de datos
   const newEmpresa: IEmpresa = {
-    código : "",
+    codigo : "",
     nombre,
     status
   };
@@ -59,13 +59,19 @@ router.post('/new', (req, res) => {
 router.put('/upd/:id', (req, res) => {
   const { id } = req.params;
   const {
-    nombre="John Doe Corp",
-    status="Activo",
+    nombre="----NotRecieved------",
+    status="----NotRecieved------",
     observacion = ""
   } = req.body;
 
+  if (
+    nombre === "----NotRecieved------"
+    || status === "----NotRecieved------"
+  ) {
+    return res.status(403).json({"error":"Debe venir el nombre y status correctos"});
+  }
   const UpdateEmpresa : IEmpresa = {
-    código: id,
+    codigo: id,
     nombre,
     status,
     observacion
@@ -86,15 +92,15 @@ router.put('/upd/:id', (req, res) => {
 });
 
 router.delete('/del/:id', (req, res)=>{
-  const {id : código} = req.params;
-  if(empresasModel.delete(código)){
+  const {id : codigo} = req.params;
+  if(empresasModel.delete(codigo)){
     return res.status(200).json({"deleted": true});
   }
   return res.status(404).json({"error":"No se pudo eliminar Empresa"});
 });
 /*
 router.get('/', function(_req, res){
-  
+
 });
  */
 
