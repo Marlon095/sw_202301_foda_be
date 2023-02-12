@@ -2,7 +2,7 @@ import express from 'express';
 const router  = express.Router();
 
 
-import empresasRouter from './empresas/empresas';
+
 // REST API
 // Internet  ->  HTTP  ->  REST API JSON ->  DB
 // SOAP XML wsdl
@@ -28,6 +28,7 @@ router.get('/version', (_req, res)=>{
   res.json(jsonResp);
  });
 
+import empresasRouter from './empresas/empresas';
 router.use('/empresas', empresasRouter);
 
  //router.get  router.post router.put router.delete  router.use
