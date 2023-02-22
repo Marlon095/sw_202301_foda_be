@@ -1,4 +1,4 @@
-import { Db, Collection, Document, ObjectId, Filter, WithId, OptionalUnlessRequiredId } from 'mongodb';
+import { Db, Collection,  ObjectId, Filter, OptionalUnlessRequiredId } from 'mongodb';
 
 import { IDataAccessObject } from "./IDataAccessObject";
 import { IDBConnection } from './IDBConnection';
