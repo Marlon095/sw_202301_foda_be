@@ -1,4 +1,4 @@
-/* esta interfa de usuario debe de tener debe de tener:
+/* esta interfaz de usuario debe de tener:
  nombre
  correo electronico
  contraseña
@@ -12,7 +12,7 @@
     codigo: string;
     nombre: string;
     correo: string;
-    ccntraseña: string;
+    contraseña?: string;
     status: string;
     created?: Date;
     updated?: Date;

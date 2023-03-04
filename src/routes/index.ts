@@ -22,7 +22,7 @@ router.get('/', (_req, res) => {
 
 // http://localhost:3001/version
 router.get('/version', (_req, res)=>{
-  const version: string = "1.0.0";
+  const version = "1.0.0";
   const jsonResp = {"name":"FODA Be", "version": version};
   // string, number, boolean, types, interfaces, classes, enumerators
   res.json(jsonResp);
@@ -34,5 +34,8 @@ router.use('/empresas', empresasRouter);
 import fodaRouter from './foda/foda';
 router.use('/foda', fodaRouter);
  //router.get  router.post router.put router.delete  router.use
+
+import usersRouter from './users/users';
+router.use('/user', usersRouter);
 
 export default router;

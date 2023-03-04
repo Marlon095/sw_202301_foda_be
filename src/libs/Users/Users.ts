@@ -8,7 +8,7 @@ export class Usuarios {
   getAll() {
     return this.dao.findAll();
   }
-  getById(id: string) {
+  getById(id: string) { 
     return this.dao.findByID(id);
   }
   add(nuevousuario: IUser) {
