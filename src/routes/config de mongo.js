@@ -1,4 +1,5 @@
 var docs = [];
+const db = db
 for (var i = 0 ; i<100 ; i++){
   var doc = {
     nombre: 'Usuario ' + (i + 1),
