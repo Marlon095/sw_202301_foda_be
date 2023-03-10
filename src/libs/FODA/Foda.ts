@@ -1,13 +1,12 @@
 import { IDataAccessObject } from "@dao/IDataAccessObject";
-import { FodaDao } from "@server/dao/models/FODA/FodaDao";
+import { FodaDao } from "@dao/models/Foda/FodaDao";
 import { IFoda, IFodaEstados } from "@server/dao/models/Foda/IFoda";
+import { EFodaType } from "@dao/models/Foda/IFodaEntry";
 
 export class Foda {
   private fodaDao: FodaDao;
-  private empresaDao: IDataAccessObject;
-  constructor(foda: IDataAccessObject, empresa: IDataAccessObject) {
+  constructor(foda: IDataAccessObject) {
     this.fodaDao = foda as FodaDao;
-    this.empresaDao = empresa;
   }
   public async newFoda(nombre: string, empresaId: string) {
     try {
@@ -21,7 +20,7 @@ export class Foda {
       return null;
     }
   }
-  public async updateFoda(fodaId: string, type: 'F' | 'D' | 'O' | 'A') {
+  public async updateFoda(fodaId: string, type: EFodaType) {
     const result = await (this.fodaDao as FodaDao).updateCounter(fodaId, type);
     console.log('updateFoda:', result);
     const rt = await this.fodaDao.findByID(fodaId);
